@@ -1,0 +1,50 @@
+substitutions:
+  devicename: water-softener
+  fullname: Water Softener
+
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: "oakridge"
+  password: "donkeykong"
+  domain: .home
+  fast_connect: true
+
+# Enable logging
+logger:
+  level: info
+
+ota:
+  password: !secret ota_password
+
+mqtt:
+  broker: 192.168.100.5
+  topic_prefix: esphome/${devicename}
+
+time:
+  - platform: sntp
+
+switch:
+  - platform: restart
+    name: ${fullname} Restart
+
+sensor:
+  - platform: uptime
+    name: ${fullname} Uptime
+
+  - platform: ultrasonic
+    trigger_pin: D2
+    echo_pin: D1
+    name: Saltlevel 1 Distance
+    update_interval: 1h
+    unit_of_measurement: cm
+
+  - platform: ultrasonic
+    trigger_pin: D5
+    echo_pin: D0
+    name: Saltlevel 2 Distance
+    update_interval: 1h
+    unit_of_measurement: cm
