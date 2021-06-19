@@ -35,21 +35,21 @@ sensor:
   - platform: uptime
     name: ${fullname} Uptime
 
-  - platform: ultrasonic
-    trigger_pin: D2
-    echo_pin: D1
-    name: Saltlevel 1 Distance
-    update_interval: 1h
-    unit_of_measurement: m
+  # - platform: ultrasonic
+  #   trigger_pin: D2
+  #   echo_pin: D1
+  #   name: Saltlevel 1 Distance
+  #   update_interval: 1h
+  #   unit_of_measurement: m
 
-  - platform: ultrasonic
-    trigger_pin: D2
-    echo_pin: D1
-    name: Saltlevel 1 Height
-    update_interval: 1h
-    unit_of_measurement: cm
-    filters:
-      - lambda: return (0.35 - x) * 100.0;
+  # - platform: ultrasonic
+  #   trigger_pin: D2
+  #   echo_pin: D1
+  #   name: Saltlevel 1 Height
+  #   update_interval: 1h
+  #   unit_of_measurement: cm
+  #   filters:
+  #     - lambda: return (int)((0.35 - x) * 100.0);
 
   - platform: ultrasonic
     trigger_pin: D2
@@ -57,24 +57,26 @@ sensor:
     name: Saltlevel 1 Percent
     update_interval: 1h
     unit_of_measurement: "%"
+    accuracy_decimals: 0
+    retain: true
     filters:
-      - lambda: return (1 - (x / 0.35)) * 100.0;
+      - lambda: return (int)((1 - (x / 0.35)) * 100.0);
 
-  - platform: ultrasonic
-    trigger_pin: D5
-    echo_pin: D0
-    name: Saltlevel 2 Distance
-    update_interval: 1h
-    unit_of_measurement: m
+  # - platform: ultrasonic
+  #   trigger_pin: D5
+  #   echo_pin: D0
+  #   name: Saltlevel 2 Distance
+  #   update_interval: 1h
+  #   unit_of_measurement: m
 
-  - platform: ultrasonic
-    trigger_pin: D5
-    echo_pin: D0
-    name: Saltlevel 2 Height
-    update_interval: 1h
-    unit_of_measurement: cm
-    filters:
-      - lambda: return (0.35 - x) * 100.0;
+  # - platform: ultrasonic
+  #   trigger_pin: D5
+  #   echo_pin: D0
+  #   name: Saltlevel 2 Height
+  #   update_interval: 1h
+  #   unit_of_measurement: cm
+  #   filters:
+  #     - lambda: return (int)((0.35 - x) * 100.0);
 
   - platform: ultrasonic
     trigger_pin: D5
@@ -82,5 +84,7 @@ sensor:
     name: Saltlevel 2 Percent
     update_interval: 1h
     unit_of_measurement: "%"
+    accuracy_decimals: 0
+    retain: true
     filters:
-      - lambda: return (1 - (x / 0.35)) * 100.0;
+      - lambda: return (int)((1 - (x / 0.35)) * 100.0);
