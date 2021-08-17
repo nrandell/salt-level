@@ -11,18 +11,21 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   domain: .home
-  fast_connect: true
+  # fast_connect: true
 
 # Enable logging
 logger:
   level: info
 
+api:
+  password: !secret api_password
+
 ota:
   password: !secret ota_password
 
-mqtt:
-  broker: 192.168.100.5
-  topic_prefix: esphome/${devicename}
+# mqtt:
+#   broker: 192.168.100.5
+#   topic_prefix: esphome/${devicename}
 
 time:
   - platform: sntp
@@ -35,56 +38,26 @@ sensor:
   - platform: uptime
     name: ${fullname} Uptime
 
-  # - platform: ultrasonic
-  #   trigger_pin: D2
-  #   echo_pin: D1
-  #   name: Saltlevel 1 Distance
-  #   update_interval: 1h
-  #   unit_of_measurement: m
-
-  # - platform: ultrasonic
-  #   trigger_pin: D2
-  #   echo_pin: D1
-  #   name: Saltlevel 1 Height
-  #   update_interval: 1h
-  #   unit_of_measurement: cm
-  #   filters:
-  #     - lambda: return (int)((0.35 - x) * 100.0);
-
   - platform: ultrasonic
     trigger_pin: D2
     echo_pin: D1
     name: Saltlevel 1 Percent
     update_interval: 1h
+    # expire_after: 4000s
     unit_of_measurement: "%"
     accuracy_decimals: 0
-    retain: true
+    # retain: true
     filters:
       - lambda: return (int)((1 - (x / 0.35)) * 100.0);
-
-  # - platform: ultrasonic
-  #   trigger_pin: D5
-  #   echo_pin: D0
-  #   name: Saltlevel 2 Distance
-  #   update_interval: 1h
-  #   unit_of_measurement: m
-
-  # - platform: ultrasonic
-  #   trigger_pin: D5
-  #   echo_pin: D0
-  #   name: Saltlevel 2 Height
-  #   update_interval: 1h
-  #   unit_of_measurement: cm
-  #   filters:
-  #     - lambda: return (int)((0.35 - x) * 100.0);
 
   - platform: ultrasonic
     trigger_pin: D5
     echo_pin: D0
     name: Saltlevel 2 Percent
     update_interval: 1h
+    # expire_after: 4000s
     unit_of_measurement: "%"
     accuracy_decimals: 0
-    retain: true
+    # retain: true
     filters:
       - lambda: return (int)((1 - (x / 0.35)) * 100.0);
